@@ -1,0 +1,12 @@
+[
+  {
+    "brand": "HP",
+    "model": "AXY",
+    "processor": "Intel",
+    "ram": "16GB",
+    "storage": "228",
+    "price": 50000,
+    "availability": true,
+    "id": "9b42fc36-4b0c-48f4-9660-702bac873377"
+  }
+]

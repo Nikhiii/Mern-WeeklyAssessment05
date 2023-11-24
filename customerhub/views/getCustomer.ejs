@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="getCustomer.css">
+</head>
+<body>
+    <h1>Customer Details</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Account Number</th>
+            <th>Action</th> <!-- Replace "ID" with "Action" -->
+        </tr>
+        <% customers.forEach(function(customer) { %>
+            <tr>
+                <td><%= customer.name %></td>
+                <td><%= customer.email %></td>
+                <td><%= customer.phone %></td>
+                <td><%= customer.address %></td>
+                <td><%= customer.accountNumber %></td>
+                <td>
+                    <!-- Add "Update" and "Delete" buttons -->
+                    <button onclick="updateCustomer('<%= customer.id %>')">Update</button>
+                    <button onclick="deleteCustomer('<%= customer.id %>')">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <script>
+        function updateCustomer(customerId) {
+            // Redirect to the updateCustomer.ejs view with the customer ID as a query parameter
+            window.location.href = `/updateCustomer?customerId=${customerId}`;
+        }
+        function deleteCustomer(customerId) {
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this customer?")) {
+                // If the user confirms, redirect to the deleteCustomer.ejs view with the customer ID as a query parameter
+                window.location.href = `/deleteCustomer?customerId=${customerId}`;
+            }
+        }
+    </script>
+</body>
+</html>

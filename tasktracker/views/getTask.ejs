@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Details</title>
+    <!-- Update the stylesheet link if necessary -->
+    <link rel="stylesheet" href="getTask.css">
+</head>
+<body>
+    <h1>Task Details</h1>
+    <table>
+        <tr>
+            <th>Task Title</th>
+            <th>Task Description</th>
+            <th>Task Priority</th>
+            <th>Task Status</th>
+            <th>Due Date</th>
+            <th>Action</th>
+        </tr>
+        <!-- Loop through task data -->
+        <!-- Replace "laptops" with your task data variable name -->
+        <% tasks.forEach(function(task) { %>
+            <tr>
+                <td><%= task.taskTitle %></td>
+                <td><%= task.taskDescription %></td>
+                <td><%= task.taskPriority %></td>
+                <td><%= task.taskStatus %></td>
+                <td><%= task.taskDueDate %></td>
+                <td>
+                    <button onclick="updateTask('<%= task.id %>')">Update</button>
+                    <button onclick="deleteTask('<%= task.id %>')">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <script>
+        function updateTask(taskId) {
+            // Redirect to the updateTask.ejs view with the task ID as a query parameter
+            window.location.href = `/updateTask?taskId=${taskId}`;
+        }
+
+        function deleteTask(taskId) {
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this task?")) {
+                // If the user confirms, redirect to the deleteTask.ejs view with the task ID as a query parameter
+                window.location.href = `/deleteTask?taskId=${taskId}`;
+            }
+        }
+    </script>
+</body>
+</html>

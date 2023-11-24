@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Task</title>
+    <!-- Update the stylesheet link if necessary -->
+    <link rel="stylesheet" href="updateTask.css">
+</head>
+<body>
+    <h1>Update Task</h1>
+    <form action="/update-task" method="POST"> <!-- Ensure this matches your server route -->
+        <input type="hidden" name="taskId" value="<%= task.id %>"> <!-- Hidden input to send task ID -->
+
+        <label for="taskTitle">Task Title:</label>
+        <input type="text" id="taskTitle" name="taskTitle" value="<%= task.taskTitle %>" required><br>
+
+        <label for="taskDescription">Task Description:</label>
+        <textarea id="taskDescription" name="taskDescription" required><%= task.taskDescription %></textarea><br>
+
+        <label for="taskPriority">Task Priority:</label>
+        <select id="taskPriority" name="taskPriority" required>
+            <option value="High" <% if (task.taskPriority === "High") { %>selected<% } %>>High</option>
+            <option value="Medium" <% if (task.taskPriority === "Medium") { %>selected<% } %>>Medium</option>
+            <option value="Low" <% if (task.taskPriority === "Low") { %>selected<% } %>>Low</option>
+        </select><br>
+
+        <label for="taskStatus">Task Status:</label>
+        <select id="taskStatus" name="taskStatus" required>
+            <option value="Not Started" <% if (task.taskStatus === "Not Started") { %>selected<% } %>>Not Started</option>
+            <option value="In Progress" <% if (task.taskStatus === "In Progress") { %>selected<% } %>>In Progress</option>
+            <option value="Completed" <% if (task.taskStatus === "Completed") { %>selected<% } %>>Completed</option>
+        </select><br>
+
+        <label for="taskDueDate">Due Date:</label>
+        <input type="date" id="taskDueDate" name="taskDueDate" value="<%= task.taskDueDate %>" required><br>
+
+        <!-- Add other fields for updating task details as needed -->
+        <button type="submit">Update</button>
+    </form>
+    <!-- Optional: Add JavaScript for client-side validation or interactions -->
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="addTask.css">
+
+</head>
+
+<body>
+    <h1>Add Task</h1>
+    <form id="taskForm">
+        <label for="taskTitle">Task Title:</label>
+        <input type="text" id="taskTitle" name="taskTitle" required>
+        <br>
+        <label for="taskDescription">Task Description:</label>
+        <textarea id="taskDescription" name="taskDescription" required></textarea>
+        <br>
+        <label for="taskPriority">Task Priority:</label>
+        <select id="taskPriority" name="taskPriority" required>
+            <option disabled selected>Select</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+        <br>
+        <label for="taskStatus">Task Status:</label>
+        <select id="taskStatus" name="taskStatus" required>
+            <option disabled selected>Select</option>
+            <option value="Not Started">Not Started</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+        <br>
+        <label for="taskDueDate">Due Date:</label>
+        <input type="date" id="taskDueDate" name="taskDueDate" required>
+        <br>
+        <button type="submit">Add Task</button>
+    </form>    
+    
+
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const taskData = {};
+            
+            formData.forEach((value, key) => {
+                taskData[key] = value;
+            });
+            
+            try {
+                const response = await fetch('/api/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(taskData),
+                });
+
+                if (response.status === 200) {
+                    alert('Task added successfully!');
+                    e.target.reset();
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.title} - ${data.message}`);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while adding the task.');
+            }
+        });
+    </script>
+</body>
+</html>

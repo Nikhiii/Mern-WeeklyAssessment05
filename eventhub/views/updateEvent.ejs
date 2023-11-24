@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Event</title> <!-- Change the title to "Update Event" -->
+    <link rel="stylesheet" href="updateEvent.css"> <!-- Change the stylesheet filename to "updateEvent.css" -->
+</head>
+<body>
+    <h1>Update Event</h1>
+    <form action="/update-event" method="POST"> <!-- Adjust the form action and method as needed -->
+        <input type="hidden" name="eventId" value="<%= appevent.id %>"> <!-- Hidden input to send event ID -->
+
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" name="eventName" value="<%= appevent.eventName %>" required><br>
+
+        <label for="eventDate">Event Date:</label>
+        <input type="date" id="eventDate" name="eventDate" value="<%= appevent.eventDate %>" required><br>
+
+        <label for="eventLocation">Event Location:</label>
+        <input type="text" id="eventLocation" name="eventLocation" value="<%= appevent.eventLocation %>" required><br>
+
+        <label for="eventDescription">Event Description:</label>
+        <textarea id="eventDescription" name="eventDescription" required><%= appevent.eventDescription %></textarea><br>
+
+        <label for="eventOrganizer">Event Organizer:</label>
+        <input type="text" id="eventOrganizer" name="eventOrganizer" value="<%= appevent.eventOrganizer %>" required><br>
+
+        <label for="eventTicketPrice">Ticket Price:</label>
+        <input type="text" id="eventTicketPrice" name="eventTicketPrice" value="<%= appevent.eventTicketPrice %>" required><br>
+
+        <!-- Add other fields for updating event details as needed -->
+        <button type="submit">Update</button>
+    </form>
+    <!-- Optional: Add JavaScript for client-side validation or interactions -->
+</body>
+</html>

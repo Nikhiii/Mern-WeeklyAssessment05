@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <!-- Update the stylesheet link if necessary -->
+    <link rel="stylesheet" href="getBook.css">
+</head>
+<body>
+    <h1>Book Details</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Published Year</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Action</th>
+        </tr>
+        <!-- Loop through book data -->
+        <!-- Replace "books" with your book data variable name -->
+        <% books.forEach(function(book) { %>
+            <tr>
+                <td><%= book.title %></td>
+                <td><%= book.author %></td>
+                <td><%= book.genre %></td>
+                <td><%= book.publishedYear %></td>
+                <td><%= book.price %></td>
+                <td><%= book.availability ? "Available" : "Not Available" %></td>
+                <td>
+                    <button onclick="updateBook('<%= book.id %>')">Update</button>
+                    <button onclick="deleteBook('<%= book.id %>')">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <script>
+        function updateBook(bookId) {
+            // Redirect to the updateBook.ejs view with the book ID as a query parameter
+            window.location.href = `/updateBook?bookId=${bookId}`;
+        }
+
+        function deleteBook(bookId) {
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this book?")) {
+                // If the user confirms, redirect to the deleteBook.ejs view with the book ID as a query parameter
+                window.location.href = `/deleteBook?bookId=${bookId}`;
+            }
+        }
+    </script>
+</body>
+</html>

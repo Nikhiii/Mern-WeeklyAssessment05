@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="getEmployee.css">
+</head>
+<body>
+    <h1>Employee Details</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <!-- Loop through employee data -->
+        <% employees.forEach(function(employee) { %>
+            <tr>
+                <td><%= employee.name %></td>
+                <td><%= employee.email %></td>
+                <td><%= employee.phone %></td>
+                <td><%= employee.department %></td>
+                <td><%= employee.status %></td>
+                <td>
+                    <button onclick="updateEmployee('<%= employee.id %>')">Update</button>
+                    <button onclick="deleteEmployee('<%= employee.id %>')">Delete</button>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <script>
+        function updateEmployee(employeeId) {
+            // Redirect to the updateEmployee.ejs view with the employee ID as a query parameter
+            window.location.href = `/updateEmployee?employeeId=${employeeId}`;
+        }
+
+        function deleteEmployee(employeeId) {
+            // Display a confirmation dialog
+            if (confirm("Are you sure you want to delete this employee?")) {
+                // If the user confirms, redirect to the deleteEmployee.ejs view with the employee ID as a query parameter
+                window.location.href = `/deleteEmployee?employeeId=${employeeId}`;
+            }
+        }
+    </script>
+</body>
+</html>

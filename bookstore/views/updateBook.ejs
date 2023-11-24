@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <!-- Update the stylesheet link if necessary -->
+    <link rel="stylesheet" href="updateBook.css">
+</head>
+<body>
+    <h1>Update Book</h1>
+    <form action="/update-book" method="POST"> <!-- Ensure this matches your server route -->
+        <input type="hidden" name="bookId" value="<%= book.id %>"> <!-- Hidden input to send book ID -->
+
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<%= book.title %>" required><br>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" value="<%= book.author %>" required><br>
+
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" value="<%= book.genre %>" required><br>
+
+        <label for="publishedYear">Published Year:</label>
+        <input type="text" id="publishedYear" name="publishedYear" value="<%= book.publishedYear %>" required><br>
+
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" value="<%= book.price %>" required><br>
+
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option value="true" <% if (book.availability) { %>selected<% } %>>Available</option>
+            <option value="false" <% if (!book.availability) { %>selected<% } %>>Not Available</option>
+        </select><br>
+
+        <!-- Add other fields for updating book details as needed -->
+        <button type="submit">Update</button>
+    </form>
+    <!-- Optional: Add JavaScript for client-side validation or interactions -->
+</body>
+</html>

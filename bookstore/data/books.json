@@ -1,0 +1,11 @@
+[
+  {
+    "title": "C Basics",
+    "author": "Dennis Ritchie",
+    "genre": "Technology",
+    "publishedYear": 1985,
+    "price": 560,
+    "availability": true,
+    "id": "d82255d3-d4f0-49d5-a3bd-a75e198c4f4f"
+  }
+]

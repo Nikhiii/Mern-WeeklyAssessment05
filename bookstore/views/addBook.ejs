@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add book</title>
+    <link rel="stylesheet" href="addBook.css">
+
+</head>
+
+<body>
+    <h1>Add book</h1>
+    <form id="bookForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+        <br>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" required>
+        <br>
+        <label for="publishedYear">Published Year:</label>
+        <input type="text" id="publishedYear" name="publishedYear" required>
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required>
+        <br>
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability" required>
+            <option disabled selected>Select</option>
+            <option value="true">Available</option>
+            <option value="false">Not Available</option>
+        </select>
+        <br>
+        <button type="submit">Add Book</button>
+    </form>       
+    
+
+    <script>
+        document.getElementById('bookForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const bookData = {};
+            
+            formData.forEach((value, key) => {
+                bookData[key] = value;
+            });
+            
+            try {
+                const response = await fetch('/api/books', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(bookData),
+                });
+
+                if (response.status === 200) {
+                    alert('Book added successfully!');
+                    e.target.reset();
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.title} - ${data.message}`);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while adding the book.');
+            }
+        });
+    </script>
+</body>
+</html>

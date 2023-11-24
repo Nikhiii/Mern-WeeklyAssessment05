@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="addEmployee.css">
+
+</head>
+
+<body>
+    <h1>Add Employee</h1>
+    <form id="employeeForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <br>
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" required>
+        <br>
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+            <option disabled selected>Select</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+        <br>
+        <button type="submit">Add Employee</button>
+    </form>
+    
+    
+
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const employeeData = {};
+            
+            formData.forEach((value, key) => {
+                employeeData[key] = value;
+            });
+            
+            try {
+                const response = await fetch('/api/employees', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(employeeData),
+                });
+
+                if (response.status === 200) {
+                    alert('Employee added successfully!');
+                    e.target.reset();
+                } else {
+                    const data = await response.json();
+                    alert(`Error: ${data.title} - ${data.message}`);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('An error occurred while adding the employee.');
+            }
+        });
+    </script>
+</body>
+</html>
